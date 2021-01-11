@@ -1,19 +1,40 @@
 var $start = document.querySelector('#start')
 var $game = document.querySelector('#game')
+var $time = document.querySelector('#time')
 
 var score  = 0
+var isGameStarted = false
 
 $start.addEventListener('click', startGame)
 $game.addEventListener('click', handleBoxClick)
 
 function startGame() {
+    isGameStarted = true
     $start.classList.add('hide')
     $game.style.backgroundColor = '#fff'
+    var interval = setInterval(function () {
+        var time = parseFloat($time.textContent)
+        if(time <= 0) {
+            // end game
+            clearInterval(interval)
+            endGame()
+        }
+        else {
+            $time.textContent = (time - 0.1).toFixed(1)
+        }
+    }, 100)
 
     renderBox()
 }
 
+function endGame() {
+    isGameStarted = false
+}
+
 function handleBoxClick(event) {
+    if(!isGameStarted)
+        return
+        
     if(event.target.dataset.box) {
         score++;
         renderBox()
