@@ -86,7 +86,7 @@ function renderBox() {
 
     box.style.height = box.style.width = boxSize + 'px'
     box.style.position = 'absolute'
-    box.style.backgroundColor = '#000'
+    box.style.backgroundColor = getRandomBoxColor()
     box.style.top = getRandom(0, maxTop) + 'px'
     box.style.left = getRandom(0, maxLeft) + 'px'
     box.style.cursor = 'pointer'
@@ -98,4 +98,10 @@ function renderBox() {
 
 function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min) + min)
+}
+
+function getRandomBoxColor() {
+    var colors = ['red', 'blue', 'green', 'teal', 'rosybrown', 'tan', 'plum', 'saddlebrown'];   
+    var rand = colors[Math.floor(Math.random() * colors.length)];
+    return rand
 }
